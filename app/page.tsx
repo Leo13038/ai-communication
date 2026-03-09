@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 
@@ -71,20 +71,20 @@ export default function Home() {
   const riskInfo =
     result?.risk !== undefined
       ? result.risk < 30
-        ? { color: "#1b8f52", label: "低" }
+        ? { color: "#2baf70", label: "低" }
         : result.risk < 60
-        ? { color: "#c9811f", label: "中" }
-        : { color: "#d84545", label: "高" }
+        ? { color: "#d38f27", label: "中" }
+        : { color: "#de5667", label: "高" }
       : { color: "#6b7280", label: "-" };
 
   return (
     <main className="page">
       <div className="float one" />
       <div className="float two" />
+
       <section className="shell">
         <header className="head">
           <div>
-            <p className="kicker">恋爱消息润色器</p>
             <h1>好好说话</h1>
             <p className="subtitle">把上头的话，换成对方更愿意回的聊天消息。</p>
           </div>
@@ -173,48 +173,72 @@ export default function Home() {
 
       <style jsx>{`
         .page {
-          --bg1: #f1f8ef;
-          --bg2: #fffaf0;
-          --card: #ffffffd9;
-          --line: #dde8d8;
-          --text: #21302b;
-          --muted: #5f7468;
-          --accent: #2a9d6f;
+          --bg1: #f4f7ff;
+          --bg2: #eef3ff;
+          --bg3: #fbfdff;
+          --glass: rgba(255, 255, 255, 0.5);
+          --glass-strong: rgba(255, 255, 255, 0.66);
+          --line: rgba(255, 255, 255, 0.52);
+          --text: #182033;
+          --muted: #53607e;
           min-height: 100vh;
-          padding: 24px 16px 40px;
+          padding: 32px 16px 48px;
           position: relative;
           overflow: hidden;
-          background: radial-gradient(circle at 10% 10%, #d9f4de 0%, transparent 40%),
-            radial-gradient(circle at 90% 15%, #ffe5c8 0%, transparent 32%),
-            linear-gradient(150deg, var(--bg1) 0%, var(--bg2) 100%);
+          background: linear-gradient(160deg, var(--bg1) 0%, var(--bg2) 42%, var(--bg3) 100%);
           color: var(--text);
           font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+        }
+
+        .page::before,
+        .page::after {
+          content: "";
+          position: absolute;
+          inset: -20%;
+          pointer-events: none;
+        }
+
+        .page::before {
+          background: radial-gradient(circle at 20% 16%, #d8e7ff 0%, transparent 34%),
+            radial-gradient(circle at 84% 13%, #ffe6ef 0%, transparent 32%),
+            radial-gradient(circle at 70% 76%, #d8f6ff 0%, transparent 30%);
+        }
+
+        .page::after {
+          opacity: 0.45;
+          background-image: linear-gradient(
+            120deg,
+            rgba(255, 255, 255, 0.18) 0%,
+            rgba(255, 255, 255, 0) 28%,
+            rgba(255, 255, 255, 0.15) 60%,
+            rgba(255, 255, 255, 0) 100%
+          );
         }
 
         .float {
           position: absolute;
           border-radius: 999px;
-          filter: blur(40px);
-          opacity: 0.5;
+          filter: blur(58px);
+          opacity: 0.68;
           pointer-events: none;
         }
 
         .float.one {
-          width: 180px;
-          height: 180px;
-          background: #bbe7ca;
-          top: 15%;
-          left: -60px;
-          animation: drift 8s ease-in-out infinite;
+          width: 320px;
+          height: 320px;
+          background: #bfd4ff;
+          top: -70px;
+          left: -120px;
+          animation: drift 12s ease-in-out infinite;
         }
 
         .float.two {
-          width: 240px;
-          height: 240px;
-          background: #ffd9b8;
-          right: -90px;
-          top: 45%;
-          animation: drift 10s ease-in-out infinite reverse;
+          width: 360px;
+          height: 360px;
+          background: #ffd9e8;
+          right: -150px;
+          top: 38%;
+          animation: drift 14s ease-in-out infinite reverse;
         }
 
         .shell {
@@ -222,110 +246,112 @@ export default function Home() {
           z-index: 1;
           max-width: 920px;
           margin: 0 auto;
-          padding: 26px;
-          border-radius: 28px;
-          background: var(--card);
-          border: 1px solid #ffffff99;
-          backdrop-filter: blur(14px);
-          box-shadow: 0 24px 54px rgba(28, 56, 45, 0.12);
+          padding: 28px;
+          border-radius: 34px;
+          background: var(--glass);
+          border: 1px solid var(--line);
+          backdrop-filter: blur(26px) saturate(150%);
+          -webkit-backdrop-filter: blur(26px) saturate(150%);
+          box-shadow: 0 24px 68px rgba(40, 62, 120, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.8);
         }
 
         .head {
           display: flex;
-          align-items: flex-start;
+          align-items: center;
           justify-content: space-between;
           gap: 20px;
-          margin-bottom: 18px;
-        }
-
-        .kicker {
-          margin: 0 0 8px;
-          font-size: 13px;
-          letter-spacing: 0.08em;
-          color: #3f7f66;
+          margin-bottom: 20px;
         }
 
         h1 {
           margin: 0;
-          font-size: clamp(36px, 7vw, 56px);
-          line-height: 1;
-          font-family: "STKaiti", "KaiTi", "Songti SC", "STSong", serif;
+          font-size: clamp(38px, 7vw, 58px);
+          line-height: 0.98;
+          font-family: "SF Pro Display", "PingFang SC", "Segoe UI", sans-serif;
           font-weight: 600;
-          letter-spacing: 0.02em;
-          color: #2f443b;
+          letter-spacing: -0.02em;
+          color: #111a2c;
+          text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
         }
 
         .subtitle {
-          margin: 12px 0 0;
+          margin: 14px 0 0;
           color: var(--muted);
-          font-size: 16px;
+          font-size: 15px;
+          line-height: 1.7;
         }
 
         .status {
           display: inline-flex;
           align-items: center;
           gap: 8px;
-          padding: 10px 12px;
+          padding: 10px 14px;
           border-radius: 999px;
-          background: #ecfbf2;
-          color: #246648;
+          background: rgba(255, 255, 255, 0.62);
+          color: #33456c;
+          border: 1px solid rgba(255, 255, 255, 0.8);
+          backdrop-filter: blur(12px);
           font-size: 13px;
           white-space: nowrap;
+          box-shadow: 0 8px 20px rgba(89, 109, 170, 0.12);
         }
 
         .dot {
           width: 8px;
           height: 8px;
           border-radius: 50%;
-          background: #2fbf77;
-          box-shadow: 0 0 0 6px #2fbf7722;
+          background: #45d38c;
+          box-shadow: 0 0 0 6px rgba(69, 211, 140, 0.23);
         }
 
         .composer {
-          padding: 16px;
-          border: 1px solid var(--line);
-          border-radius: 20px;
-          background: #fdfefe;
+          padding: 18px;
+          border: 1px solid rgba(255, 255, 255, 0.68);
+          border-radius: 24px;
+          background: var(--glass-strong);
+          backdrop-filter: blur(16px);
+          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
         }
 
         textarea {
           width: 100%;
-          min-height: 150px;
+          min-height: 156px;
           border: none;
           outline: none;
           resize: vertical;
           font-size: 17px;
           line-height: 1.7;
           background: transparent;
-          color: var(--text);
+          color: #1c2740;
           font-family: inherit;
         }
 
         textarea::placeholder {
-          color: #9aaea3;
+          color: #8090b0;
         }
 
         .actions {
-          margin-top: 10px;
+          margin-top: 12px;
           display: flex;
           justify-content: flex-end;
         }
 
         .actions button {
-          border: none;
-          border-radius: 14px;
-          padding: 11px 18px;
-          background: linear-gradient(135deg, #1c9a68 0%, #2eb27d 100%);
+          border: 1px solid rgba(255, 255, 255, 0.8);
+          border-radius: 999px;
+          padding: 11px 20px;
+          background: linear-gradient(135deg, #6e8fff 0%, #8fa4ff 100%);
           color: #fff;
           font-size: 15px;
           font-weight: 600;
           cursor: pointer;
-          transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease;
+          transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.18s ease;
+          box-shadow: 0 10px 24px rgba(80, 107, 208, 0.33), inset 0 1px 0 rgba(255, 255, 255, 0.4);
         }
 
         .actions button:hover:not(:disabled) {
-          transform: translateY(-1px);
-          box-shadow: 0 10px 20px #1b875a2b;
+          transform: translateY(-2px);
+          box-shadow: 0 14px 28px rgba(80, 107, 208, 0.36), inset 0 1px 0 rgba(255, 255, 255, 0.5);
         }
 
         .actions button:disabled {
@@ -335,17 +361,19 @@ export default function Home() {
 
         .error {
           margin: 10px 0 0;
-          color: #c43d3d;
+          color: #d13f60;
           font-size: 14px;
         }
 
         .result {
           margin-top: 20px;
-          padding: 16px;
-          border-radius: 20px;
-          border: 1px solid var(--line);
-          background: linear-gradient(180deg, #ffffff 0%, #f8fbf8 100%);
-          animation: reveal 0.35s ease;
+          padding: 18px;
+          border-radius: 24px;
+          border: 1px solid rgba(255, 255, 255, 0.7);
+          background: rgba(255, 255, 255, 0.58);
+          backdrop-filter: blur(16px);
+          animation: reveal 0.38s ease;
+          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
         }
 
         .meta {
@@ -356,28 +384,31 @@ export default function Home() {
 
         .chip {
           padding: 12px 14px;
-          border-radius: 14px;
-          border: 1px solid #e6ede3;
-          background: #ffffff;
+          border-radius: 16px;
+          border: 1px solid rgba(255, 255, 255, 0.75);
+          background: rgba(255, 255, 255, 0.62);
+          backdrop-filter: blur(12px);
         }
 
         .label {
           font-size: 12px;
-          color: #678074;
+          color: #6a7694;
           display: block;
           margin-bottom: 4px;
         }
 
         .value {
           font-size: 15px;
+          color: #1d2942;
         }
 
         .risk {
           margin-top: 12px;
-          background: #fff;
+          background: rgba(255, 255, 255, 0.62);
           padding: 12px 14px;
-          border-radius: 14px;
-          border: 1px solid #e6ede3;
+          border-radius: 16px;
+          border: 1px solid rgba(255, 255, 255, 0.76);
+          backdrop-filter: blur(12px);
         }
 
         .risk-title {
@@ -386,14 +417,14 @@ export default function Home() {
           gap: 12px;
           margin-bottom: 8px;
           font-size: 13px;
-          color: #587365;
+          color: #5e6f92;
         }
 
         .bar {
           width: 100%;
           height: 8px;
           border-radius: 999px;
-          background: #ecf2ea;
+          background: rgba(144, 163, 205, 0.22);
           overflow: hidden;
         }
 
@@ -411,26 +442,27 @@ export default function Home() {
 
         .bubble {
           max-width: 86%;
-          padding: 11px 12px;
-          border-radius: 16px;
-          border: 1px solid #e4ece0;
-          box-shadow: 0 6px 14px #3248380e;
+          padding: 11px 13px;
+          border-radius: 18px;
+          border: 1px solid rgba(255, 255, 255, 0.78);
+          backdrop-filter: blur(10px);
+          box-shadow: 0 8px 18px rgba(60, 83, 143, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.8);
         }
 
         .bubble.left {
           justify-self: start;
-          background: #ffffff;
+          background: rgba(255, 255, 255, 0.72);
         }
 
         .bubble.right {
           justify-self: end;
-          background: #dcf8e8;
-          border-color: #cdecd8;
+          background: rgba(217, 233, 255, 0.74);
+          border-color: rgba(255, 255, 255, 0.8);
         }
 
         .bubble.small {
-          background: #fff6df;
-          border-color: #f0e4c8;
+          background: rgba(245, 240, 255, 0.76);
+          border-color: rgba(255, 255, 255, 0.8);
         }
 
         .bubble-head {
@@ -444,7 +476,7 @@ export default function Home() {
         h3 {
           margin: 0;
           font-size: 13px;
-          color: #476455;
+          color: #4f5f81;
           font-weight: 600;
         }
 
@@ -452,33 +484,35 @@ export default function Home() {
           margin: 0;
           font-size: 16px;
           line-height: 1.65;
-          color: #1f3028;
+          color: #1b2740;
           word-break: break-word;
         }
 
         .bubble button {
-          border: 1px solid #d8e2d4;
-          background: #fff;
+          border: 1px solid rgba(255, 255, 255, 0.82);
+          background: rgba(255, 255, 255, 0.76);
           border-radius: 999px;
           padding: 4px 10px;
           font-size: 12px;
-          color: #4b6558;
+          color: #4c5f86;
           cursor: pointer;
-          transition: background 0.18s ease;
+          transition: background 0.18s ease, transform 0.18s ease;
         }
 
         .bubble button:hover {
-          background: #f3f8f2;
+          background: rgba(255, 255, 255, 0.94);
+          transform: translateY(-1px);
         }
 
         @media (max-width: 760px) {
           .shell {
             padding: 16px;
-            border-radius: 22px;
+            border-radius: 24px;
           }
 
           .head {
             flex-direction: column;
+            align-items: flex-start;
             gap: 12px;
           }
 
@@ -487,7 +521,7 @@ export default function Home() {
           }
 
           textarea {
-            min-height: 130px;
+            min-height: 132px;
             font-size: 16px;
           }
 
@@ -506,7 +540,7 @@ export default function Home() {
             transform: translateY(0);
           }
           50% {
-            transform: translateY(-10px);
+            transform: translateY(-12px);
           }
         }
 
